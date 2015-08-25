@@ -4,7 +4,7 @@
   <h2>Current list of queries:</h2>
   <ul>
     <% @survey.questions().each() do |question| %>
-      <li><%= question.query() %></li>
+      <li> <a href="/queries/<%= question.id() %>"><%= question.query() %></a></li>
     <% end %>
   </ul>
 <% else %>
@@ -13,8 +13,8 @@
   </p>
 <% end %>
 
-<p>Add Query:</p>
 
+<h3>Add Query:</h3>
 <form action="/surveys/<%= @survey.id() %>" method="post">
   <div class="form-group">
     <label for="query">Query</label>
@@ -23,7 +23,22 @@
   <button type="submit" class="btn">Create</button>
 </form>
 
-<P> Update Survey:</p>
+<!-- <h3> Delete Query:</h3>
+<form action="/surveys/<%= @survey.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <label for="query_select">Query</label>
+  <select id="query_select" name="query_select">
+    <% @survey.questions().each() do |question| %>
+      <option id="option_<%= question.id() %>" value="<%= question.id() %>" ><%= question.query() %></option>
+    <% end %>
+  </select>
+
+  <button type="submit" class="btn">Delete Query</button>
+</form> -->
+
+
+<br>
+<h3>Update Survey:</h3>
   <form action="/surveys/<%= @survey.id() %>" method="post">
     <input name="_method" type="hidden" value="patch">
     <div class= "form-group">
@@ -33,10 +48,8 @@
     <button type="submit" class="btn">UPDATE</button>
   </form>
 
-<p>
-  Delete Survey
-</p>
-
+<br>
+<h3>Delete Survey</h3>
 <form action="/surveys/<%= @survey.id() %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <button name="submit" class="btn">DELETE</button>

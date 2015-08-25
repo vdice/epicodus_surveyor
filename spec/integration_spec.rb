@@ -38,4 +38,13 @@ describe("Surveyr", {:type => :feature}) do
     expect(page).to have_content("Surveyr")
     expect(page).to_not have_content('My Survey')
  end
+ it("allows the user to remove questions from a survey") do
+   survey = Survey.create({:name => 'My Survey', :done => false})
+   question = Question.create({:query => "Do you enjoy programming?", :survey_id => survey.id})
+   visit("/surveys/#{survey.id()}")
+   click_link(question.query())
+   click_button("Delete Query")
+   expect(page).to have_content("My Survey")
+   expect(page).to_not have_content("Do you enjoy programming?" )
+ end
 end

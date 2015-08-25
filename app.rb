@@ -50,3 +50,17 @@ delete('/surveys/:id') do
   @surveys = Survey.all()
   erb(:index)
 end
+
+get('/queries/:id') do
+  @question = Question.find(params.fetch('id').to_i())
+  erb(:query)
+end
+
+delete('/queries/:id') do
+  question = Question.find(params.fetch('id').to_i())
+  @survey = Survey.find(question.survey_id())
+  question.destroy()
+
+  @questions = Question.all()
+  erb(:survey)
+end

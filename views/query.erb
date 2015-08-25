@@ -1,0 +1,5 @@
+<h3> Delete Query:</h3>
+<form action="/queries/<%= @question.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn">Delete Query</button>
+</form>
