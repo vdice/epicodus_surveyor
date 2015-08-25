@@ -5,6 +5,8 @@ require('pg')
 also_reload("lib/**/*.rb")
 require('./lib/survey')
 require('./lib/question')
+require('./lib/answer')
+require('./lib/questions_answer')
 
 get('/') do
   @surveys = Survey.all()

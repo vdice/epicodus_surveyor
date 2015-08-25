@@ -1,42 +1,42 @@
-<h1>Here are your surveys</h1>
 
-  <% if @surveys.any?  %>
-  <ul>
-    <h2> The surveys</h2>
-    <% @surveys.each() do |survey| %>
-      <p>
-        <%= survey.name() %>
-      </p>
 
-      <% if survey.questions().any?() %>
+<% if @surveys.any?()  %>
+<ul>
+  <h1>Here are your surveys</h1>
+  <% @surveys.each() do |survey| %>
+    <p>
+      <%= survey.name() %>
+    </p>
 
-        <% survey.questions().each() do |question| %>
-           <p>
-             <%= question.query() %>
-           </p>
-           <form action="/thank_you" method="post"> 
-             <select id="answer_select" name="answer_select" type="text">
-               <% question.answers().each() do |answer| %>
-                <option id="option_<%= answer.id() %>" value="<%= answer.id() %>"><%= answer.name() %></option>
-               <% end %>
-             </select>
-           <button type="submit" class="btn btn-success">Submit</button>
-         </form>
+    <% if survey.questions().any?() %>
 
-         <% end %>
-       <% else %>
-        <p>
-          Ooops, there aren't any questions for this survey!
-        </p>
+      <% survey.questions().each() do |question| %>
+         <p>
+           <%= question.query() %>
+         </p>
+         <form action="/thank_you" method="post">
+           <select id="answer_select" name="answer_select" type="text">
+             <% question.answers().each() do |answer| %>
+              <option id="option_<%= answer.id() %>" value="<%= answer.id() %>"><%= answer.name() %></option>
+             <% end %>
+           </select>
+         <button type="submit" class="btn btn-success">Submit</button>
+       </form>
+
        <% end %>
-
-    <% end %>
-  </ul>
-
-
-  <% else %>
-
-
-
+     <% else %>
+      <p>
+        Ooops, there aren't any questions for this survey!
+      </p>
+     <% end %>
 
   <% end %>
+</ul>
+
+
+<% else %>
+
+<h2>Oops, there aren't any surveys yet!  Sorry :(</h2>
+
+
+<% end %>

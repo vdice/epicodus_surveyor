@@ -72,5 +72,15 @@ describe("Surveyr", {:type => :feature}) do
       click_button('Submit')
       expect(page).to have_content('Thank You!')
     end
+
+    it("allows the user to navigate to the surveytaker page from the index") do
+      survey = Survey.create({:name => 'My Survey', :done => false})
+      question = Question.create({:query => "Do you enjoy programming?", :survey_id => survey.id})
+      answer = Answer.create({:name => "Yes"})
+      question.answers << answer
+      visit('/')
+      click_link("Take Survey")
+      expect(page).to have_content('Here are your surveys')
   end
+ end
 end
