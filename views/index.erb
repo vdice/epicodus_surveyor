@@ -1,0 +1,23 @@
+<h1>Welcome to Surveyr</h1>
+
+<% if @surveys.any?() %>
+  <ul>
+    <h2>Here are your Surveys:</h2>
+    <% @surveys.each() do |survey| %>
+      <li><a href="/surveys/<%= survey.id() %>"><%= survey.name() %></a> </li>
+    <% end %>
+  </ul>
+<% else %>
+<p>
+  You don't have any surveys yet!
+</p>
+<% end %>
+
+<h2>Create a New Survey</h2>
+<form action="/" method="post">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" class="form-control">
+  </div>
+  <button type="submit" class="btn">Submit</button>
+</form>
