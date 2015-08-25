@@ -1,8 +1,8 @@
 <h1>Welcome to Surveyr</h1>
 
 <% if @surveys.any?() %>
+  <h2>Here are your Surveys:</h2>
   <ul>
-    <h2>Here are your Surveys:</h2>
     <% @surveys.each() do |survey| %>
       <li><a href="/surveys/<%= survey.id() %>"><%= survey.name() %></a> </li>
     <% end %>

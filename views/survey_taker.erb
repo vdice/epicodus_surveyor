@@ -9,7 +9,6 @@
     </p>
 
     <% if survey.questions().any?() %>
-
       <% survey.questions().each() do |question| %>
          <p>
            <%= question.query() %>
@@ -33,10 +32,8 @@
   <% end %>
 </ul>
 
-
 <% else %>
 
 <h2>Oops, there aren't any surveys yet!  Sorry :(</h2>
-
 
 <% end %>
