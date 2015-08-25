@@ -61,4 +61,16 @@ describe("Surveyr", {:type => :feature}) do
     expect(page).to have_content("No")
   end
 
+  describe("Surveytaker") do
+    it("allows a user to view the different surveys and choose among them") do
+      survey = Survey.create({:name => 'My Survey', :done => false})
+      question = Question.create({:query => "Do you enjoy programming?", :survey_id => survey.id})
+      answer = Answer.create({:name => "Yes"})
+      question.answers << answer
+      visit("/survey_taker")
+      find('#answer_select').find("#option_#{answer.id()}").select_option
+      click_button('Submit')
+      expect(page).to have_content('Thank You!')
+    end
+  end
 end

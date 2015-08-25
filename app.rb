@@ -71,3 +71,14 @@ post('/queries/:id') do
   @question.answers << @answer
   erb(:query)
 end
+
+get('/survey_taker') do
+  @surveys = Survey.all()
+
+  erb(:survey_taker)
+end
+
+post('/thank_you') do
+
+  erb(:thank_you)
+end

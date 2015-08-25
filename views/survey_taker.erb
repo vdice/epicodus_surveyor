@@ -1,0 +1,42 @@
+<h1>Here are your surveys</h1>
+
+  <% if @surveys.any?  %>
+  <ul>
+    <h2> The surveys</h2>
+    <% @surveys.each() do |survey| %>
+      <p>
+        <%= survey.name() %>
+      </p>
+
+      <% if survey.questions().any?() %>
+
+        <% survey.questions().each() do |question| %>
+           <p>
+             <%= question.query() %>
+           </p>
+           <form action="/thank_you" method="post"> 
+             <select id="answer_select" name="answer_select" type="text">
+               <% question.answers().each() do |answer| %>
+                <option id="option_<%= answer.id() %>" value="<%= answer.id() %>"><%= answer.name() %></option>
+               <% end %>
+             </select>
+           <button type="submit" class="btn btn-success">Submit</button>
+         </form>
+
+         <% end %>
+       <% else %>
+        <p>
+          Ooops, there aren't any questions for this survey!
+        </p>
+       <% end %>
+
+    <% end %>
+  </ul>
+
+
+  <% else %>
+
+
+
+
+  <% end %>
