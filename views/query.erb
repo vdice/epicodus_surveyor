@@ -1,5 +1,32 @@
-<h3> Delete Query:</h3>
+<h3>Query:</h3>
+<h4><%= @question.query() %></h4>
+
+<h4>Current Answers:</h4>
+<% if @question.answers().any?() %>
+  <ul>
+    <% @question.answers().each() do |answer| %>
+      <li><%= answer.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+<p>
+  This question has no answers.
+</p>
+<% end %>
+
+<br>
+<p>Delete Query</p>
 <form action="/queries/<%= @question.id() %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <button type="submit" class="btn">Delete Query</button>
+</form>
+
+<br>
+<p>Add Answer</p>
+<form action="/queries/<%= @question.id() %>" method="post">
+  <div class="form-group">
+    <label for="answer">Answer</label>
+    <input type="text" name="answer" id="answer" class="form-control">
+  </div>
+  <button type="submit" class="btn">Add Answer</button>
 </form>

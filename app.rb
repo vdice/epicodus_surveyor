@@ -64,3 +64,10 @@ delete('/queries/:id') do
   @questions = Question.all()
   erb(:survey)
 end
+
+post('/queries/:id') do
+  @question = Question.find(params.fetch('id').to_i())
+  @answer = Answer.create({:name => params.fetch('answer')})
+  @question.answers << @answer
+  erb(:query)
+end
