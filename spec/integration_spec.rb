@@ -78,6 +78,7 @@ describe("Surveyr", {:type => :feature}) do
       answer = Answer.create({:name => "Yes"})
       question.answers << answer
       visit("/survey_taker")
+      click_link(survey.name())
       find('#answer_select').find("#option_#{answer.id()}").select_option
       click_button('Submit')
       expect(page).to have_content('Thank You!')
@@ -96,10 +97,20 @@ describe("Surveyr", {:type => :feature}) do
     it("allows the user to input his own answer to a query") do
       survey = Survey.create({:name => 'My Survey', :done => false})
       question = Question.create({:query => "Do you enjoy programming?", :survey_id => survey.id})
-      visit('/survey_taker')
+      visit("/surveys_for_taker/#{survey.id()}")
       fill_in('answer', :with => 'Your answer')
       click_button("Submit")
       expect(page).to have_content('Thank You!')
+    end
+
+    it('allows the user to choose which survey to complete') do
+      survey = Survey.create({:name => 'My Survey', :done => false})
+      question = Question.create({:query => "Do you enjoy programming?", :survey_id => survey.id})
+      survey2 = Survey.create({:name => 'My Survey 2', :done => false})
+      question2 = Question.create({:query => "Do you enjoy walking?", :survey_id => survey2.id})
+      visit('/survey_taker')
+      click_link(survey2.name())
+      expect(page).to have_content(survey2.name())
     end
   end
 end

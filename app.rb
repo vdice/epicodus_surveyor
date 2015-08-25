@@ -84,3 +84,8 @@ post('/thank_you') do
 
   erb(:thank_you)
 end
+
+get('/surveys_for_taker/:id') do
+  @survey = Survey.find(params.fetch('id').to_i())
+  erb(:survey_for_taker)
+end
