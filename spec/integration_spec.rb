@@ -22,4 +22,12 @@ describe("Surveyr", {:type => :feature}) do
     click_button('Create')
     expect(page).to have_content('Do you enjoy programming?')
   end
+
+  it("allows the user to update a survey with a new name") do
+    survey = Survey.create({:name => 'My Survey', :done => false})
+    visit("/surveys/#{survey.id()}")
+    fill_in("name", :with => 'New Survey Name')
+    click_button('UPDATE')
+    expect(page).to have_content('New Survey Name')
+  end
 end

@@ -33,3 +33,11 @@ post('/surveys/:id') do
   @survey = Survey.find(survey_id)
   erb(:survey)
 end
+
+patch('/surveys/:id') do
+  survey_id = params.fetch('id').to_i()
+  name = params.fetch('name')
+  @survey = Survey.find(survey_id)
+  @survey.update({:name => name})
+  erb(:survey)
+end
