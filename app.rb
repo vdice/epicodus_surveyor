@@ -41,3 +41,12 @@ patch('/surveys/:id') do
   @survey.update({:name => name})
   erb(:survey)
 end
+
+delete('/surveys/:id') do
+  survey_id = params.fetch('id').to_i()
+  @survey = Survey.find(survey_id)
+  @survey.destroy()
+
+  @surveys = Survey.all()
+  erb(:index)
+end

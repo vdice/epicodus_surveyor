@@ -30,4 +30,12 @@ describe("Surveyr", {:type => :feature}) do
     click_button('UPDATE')
     expect(page).to have_content('New Survey Name')
   end
+
+  it("allows the user to delete a survey from the database") do
+    survey = Survey.create({:name => 'My Survey', :done => false})
+    visit("/surveys/#{survey.id()}")
+    click_button("DELETE")
+    expect(page).to have_content("Surveyr")
+    expect(page).to_not have_content('My Survey')
+ end
 end
