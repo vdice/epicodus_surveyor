@@ -92,5 +92,14 @@ describe("Surveyr", {:type => :feature}) do
       click_link("Take Survey")
       expect(page).to have_content('Here are your surveys')
     end
+
+    it("allows the user to input his own answer to a query") do
+      survey = Survey.create({:name => 'My Survey', :done => false})
+      question = Question.create({:query => "Do you enjoy programming?", :survey_id => survey.id})
+      visit('/survey_taker')
+      fill_in('answer', :with => 'Your answer')
+      click_button("Submit")
+      expect(page).to have_content('Thank You!')
+    end
   end
 end

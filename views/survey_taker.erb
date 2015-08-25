@@ -14,11 +14,16 @@
            <%= question.query() %>
          </p>
          <form action="/thank_you" method="post">
-           <select id="answer_select" name="answer_select" type="text">
-             <% question.answers().each() do |answer| %>
-              <option id="option_<%= answer.id() %>" value="<%= answer.id() %>"><%= answer.name() %></option>
-             <% end %>
-           </select>
+           <% if question.answers().any?() %>
+             <select id="answer_select" name="answer_select" type="text">
+               <% question.answers().each() do |answer| %>
+                <option id="option_<%= answer.id() %>" value="<%= answer.id() %>"><%= answer.name() %></option>
+               <% end %>
+             </select>
+            <% else %>
+              <label for="answer">Answer</label>
+              <input type="text" name="answer" id="answer" class="form-control">
+            <% end %>
          <button type="submit" class="btn btn-success">Submit</button>
        </form>
 
