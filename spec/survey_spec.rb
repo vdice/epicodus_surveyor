@@ -19,4 +19,11 @@ describe(Survey) do
       expect(Survey.not_done()).to(eq(not_done_surveys))
     end
   end
+
+  describe("#capitalize") do
+    it("returns all survey titles capitalized") do
+      survey = Survey.create({:name => "epicodus survey", :done => false})
+      expect(survey.name()).to(eq("Epicodus Survey"))
+  end
+ end
 end
