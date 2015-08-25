@@ -13,4 +13,13 @@ describe("Surveyr", {:type => :feature}) do
      expect(page).to have_content('Epicodus Survey')
    end
   end
+
+  it("allows the user to create a question") do
+    survey = Survey.create({:name => 'My Survey', :done => false})
+    visit('/')
+    click_link(survey.name())
+    fill_in("query", :with => 'Do you enjoy programming?')
+    click_button('Create')
+    expect(page).to have_content('Do you enjoy programming?')
+  end
 end
